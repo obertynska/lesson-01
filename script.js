@@ -7,16 +7,21 @@ let isNumber = function(n){
 };
 
 let sumExpences = 0;
-let promptResult =0;
+let promptResult = 0;
+let promptResultArr = [];
+ let nameExpens = [];
 
 let money,
     accumulatedMonth, 
     start = function(){
+
        do{
           money = prompt("Ваш месячный доход?");
        }
-       while ( !isNumber(money) );
+       while ( !isNumber(money));
         };
+
+
      start();
 
 
@@ -34,19 +39,22 @@ let appData = {
          appData.deposit = confirm("Есть ли у вас депозит в банке?");
 
          for (let i = 0; i<2; i++) {
-
-          appData.expenses[i] = prompt("Введите обязательную статью расходов?");
-
+       
+           nameExpens[i] = prompt("Введите обязательную статью расходов?");        
 
           do {
             promptResult = prompt("Во сколько это обойдется?");
           } while (!isNumber(promptResult) && promptResult !== null);
+         
 
-          sumExpences += parseFloat(promptResult);
+           promptResultArr.push(parseFloat(promptResult));
+          
+           appData["expenses"][nameExpens[i]] = promptResultArr[i];
+         /*  sumExpences += parseFloat(promptResult);*/
+         
         }
-        console.log(appData.expenses);
-
-        return sumExpences;
+ 
+      /* return sumExpences;*/
        
   },
   budget: money,
@@ -54,26 +62,18 @@ let appData = {
   budgetMonth: 0,
   expensesMonth: 0,
   getExpensesMonth: function(){
- /*     let sum = 0;
-      let promptResult =0;
 
-      for (let i = 0; i<2; i++) {
+    for (let key in appData["expenses"]) {
+     appData.expensesMonth += appData["expenses"][key]; 
+     return appData.expensesMonth;
 
-          expenses[i] = prompt("Введите обязательную статью расходов?");
+   };
 
-          do {
-              promptResult = prompt("Во сколько это обойдется?");
-          } while (!isNumber(promptResult) && promptResult !== null);
+ 
 
-          sum += parseFloat(promptResult);
-      }
-      console.log(expenses);
-
-      return sum;
-    console.log(typeof(sum));*/
   },
-  getAccumulatedMonth: function(){
-    return money - expensesAmount;
+  getBudget: function(){
+    return appData.budget - appData.expensesMonth;
   },
 
   getTargetMonth: function(){
@@ -101,15 +101,16 @@ let appData = {
 appData.asking()
 
 
+
 let expenses =[];
 
-let expensesAmount = sumExpences;
-console.log(expensesAmount);
+/*let expensesAmount = sumExpences;
+console.log(expensesAmount);*/
 
-console.log("Сумма всех обязательных расходов за месяц: " + expensesAmount + " y.e.");
+console.log("Сумма всех обязательных расходов за месяц: " + appData.expensesMonth + " y.e.");
 
 
-accumulatedMonth = appData.getAccumulatedMonth();
+accumulatedMonth = appData.getBudget();
 
 console.log("Накопления за месяц: " + accumulatedMonth + " y.e.");
 
@@ -120,6 +121,10 @@ console.log("Бютжет на день " + appData.budgetDay + " y.e.");
 
 
 let getStatusIncome = appData.getStatusIncome();
+
+
+console.log(appData["expenses"]);
+let getExpensesMonth = appData.getExpensesMonth();
 
 
 
