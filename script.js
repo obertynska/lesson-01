@@ -126,7 +126,6 @@ if (appData.expensesMonth >= 0) {
 } else {
     console.log("Ваша цель не будет достигнута");
 }
-/!*appData.getTargetMonth();*!/
 
 appData.getStatusIncome();
 
@@ -138,22 +137,3 @@ appData.getInfoDeposit(
 );
 
 
-
-/*
-
-let addExpenses = "Перечислите, возможUJD, раGJHоды, за, рассчитыHYDYHый, DJериод, через, запятую";
-
-
-
-let result = "";
-
-let splitted = addExpenses.toLowerCase().split(", ");
-for (let i = 0; i < splitted.length; i++) {
-    let word = splitted[i];
-    let first = word.substring(0, 1).toUpperCase();
-    console.log(first);
-    let otherLetters = word.substring(1, word.length);
-    console.log(otherLetters);
-    result  += first + otherLetters + ", ";
-    console.log(result );
-}*/
