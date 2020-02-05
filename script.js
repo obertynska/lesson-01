@@ -48,24 +48,13 @@ let appData = {
 
 
         let addExpenses = prompt("Перечислите возможные расходы за рассчитываемый период через запятую");
-        let result = "",
-            resultEnd;
 
-        let splitted = addExpenses.toLowerCase().split(", ");
-        for (let i = 0; i < splitted.length; i++) {
+        addExpenses = addExpenses.split(",");
 
-            let word = splitted[i];
+        appData.addExpenses = addExpenses.map(function(item){
+            return item.trim().charAt(0).toUpperCase() +  item.trim().slice(1).toLowerCase()
+        }).join(", ");
 
-            let first = word.substring(0, 1).toUpperCase();
-
-            let otherLetters = word.substring(1, word.length);
-
-            result  += first + otherLetters + ", ";
-
-            resultEnd =  result.substring(0, result.length-2);          
-            
-        }
-        appData.addExpenses = resultEnd.split();
       
 
         appData.deposit = confirm("Есть ли у вас депозит в банке?");
